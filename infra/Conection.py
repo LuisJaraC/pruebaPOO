@@ -9,7 +9,7 @@ secret_key = os.getenv('secret_key')
 class Conection:
     def __init__(self):
         #se inicializa en None como una caja vacia para que no se rompa el programa
-        mydb = None
+        self.mydb = None
 
         #se inicializan asi para que se guarden en memoria y poder verificar la conexion por medio de los print del main
         #por seguridad solo se guarda en memoria el host para saber que se hizo una conexion
