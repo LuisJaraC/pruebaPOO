@@ -8,7 +8,7 @@ def main():
         print("Error al conectar a la DB")
         return #detencion del programa
     
-    print(f"conexion exitosa a host: {conexion.host}")
+    print(f"\nConexion exitosa a host: {conexion.host}")
 
     #Obtenemos objeto de conexion y lo pasamos a RepoCentral en su constructor
     #Así repo central iniciliza cada repo, evitamos main sobrepoblado

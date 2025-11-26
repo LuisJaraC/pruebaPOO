@@ -25,8 +25,6 @@ class ControladorCentral:
             if accionUsuario:
                 accionUsuario = accionUsuario.strip()
 
-            print(f'{accionUsuario} de tipo {type(accionUsuario)}')
-
             if accionUsuario == "1":
                 self.cuidadorControl.ejecutar()
             elif accionUsuario == "2":

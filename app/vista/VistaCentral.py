@@ -3,6 +3,21 @@ class VistaCentral:
         pass
 
     def mostrarVistas(self):
-        val = input("\nIngresa 1 para probar el flujo de crear cuidador en BD ")
+        print(
+            "\n           Bienvenido al menu principal\n" 
+            "\n" 
+            "¿A que archivo quieres acceder?\n" 
+            "\n" 
+            "1. Cuidador\n" 
+            "2. Ficha Clinica\n" 
+            "3. Mascota\n" 
+            "4. Procedimiento\n" 
+            "5. Veterinario\n" \
+            "0. Ingrese 0 para cerrar el programa"
+
+            )
+
         
-        return val
+        opcion = input("\nIngresa opcion: ")
+    
+        return opcion
