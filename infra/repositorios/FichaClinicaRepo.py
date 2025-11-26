@@ -11,7 +11,7 @@ class FichaClinicaRepo:
         val = (
             ficha.id_mascota,
             ficha.diagnostico,
-            ficha.tratamiento,
+            ficha.tratamientos,
             ficha.restricciones
         )
 
