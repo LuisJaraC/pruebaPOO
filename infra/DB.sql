@@ -1,6 +1,12 @@
 CREATE DATABASE veterinaria;
 USE veterinaria;
 
+CREATE TABLE USUARIO(
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario VARCHAR(50) UNIQUE,
+    contrasena VARCHAR(50),
+    rol VARCHAR(20)
+);
 CREATE TABLE cuidador(
     rut_cuidador VARCHAR (12) PRIMARY KEY,
     nombre VARCHAR(50),
@@ -30,7 +36,7 @@ CREATE TABLE ficha_clinica(
     id_ficha INT AUTO_INCREMENT PRIMARY KEY,
     id_mascota INT,
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    diagnóstico VARCHAR(50),
+    diagnostico VARCHAR(50),
     Tratamientos VARCHAR(30),
     Restricciones_alertas VARCHAR(80),
     FOREIGN KEY (id_mascota) REFERENCES mascota(id_mascota) ON DELETE CASCADE
@@ -67,7 +73,7 @@ INSERT INTO mascota (nombre, especie, raza, edad, peso, sexo, rut_cuidador) VALU
 ('Rocky', 'Perro', 'Bulldog Francés', 2, 12.0, 'M', '15.555.444-K');
 
 -- 4. Insertar Fichas Clínicas (Se asocian a los IDs de mascota 1, 2 y 3)
-INSERT INTO ficha_clinica (id_mascota, diagnóstico, Tratamientos, Restricciones_alertas) VALUES 
+INSERT INTO ficha_clinica (id_mascota, diagnostico, Tratamientos, Restricciones_alertas) VALUES 
 (1, 'Otitis canina', 'Limpieza y gotas', 'Alergia a la penicilina'),
 (2, 'Control sano', 'Vacuna triple felina', 'Ninguna'),
 (3, 'Fractura leve pata', 'Vendaje y reposo', 'No correr por 2 semanas');
