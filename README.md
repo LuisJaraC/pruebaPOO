@@ -1,3 +1,8 @@
+usuarios validos para ingresar a la interfaz
+usuario: vet1  contraseña: vet123
+
+
+
 1) Estructura del Proyecto
 
 pruebaPOO/

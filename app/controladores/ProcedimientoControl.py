@@ -25,19 +25,27 @@ class ProcedimientoControl:
 
 
     def crearProcedimiento(self):
-        print("\n       Creacion Procedimiento")
-        id_ficha = input("ID Ficha: ")
-        rut_vet = input("RUT Veterinario: ")
-        tipo = input("Tipo Proc: ")
-        indicaciones = input("Indicaciones: ")
-        costo = input("Costo: ")
+        try:
+            id_ficha = input("ID Ficha: ")
+            rut_vet = input("RUT Veterinario: ")
+            tipo = input("Tipo Proc: ")
+            indicaciones = input("Indicaciones: ")
+            costo = input("Costo: ")
 
-        # Instanciamos SIN pasar ID ni Fecha (automáticamente serán None)
-        procedimiento = Procedimiento(id_ficha, rut_vet, tipo, indicaciones, costo)
-    
-        self.conexionContexto.ProcedimientoRepo.crearProcedimiento(procedimiento)
+            # Instanciamos el objeto
+            procedimiento = Procedimiento(id_ficha, rut_vet, tipo, indicaciones, costo)
+        
+            # Llamamos al repo. Si falla (ej: RUT no existe), saltará al except ValueError
+            self.conexionContexto.ProcedimientoRepo.crearProcedimiento(procedimiento)
 
-        print("\Acción realizada con éxito, buen dia.")
+            print("\n Acción realizada con éxito.")
+
+        except ValueError as e:
+            # Aquí caen los errores de validación lógica (RUT no existe, ID duplicado, etc.)
+            print(f"\n Error de validación: {e}")
+        except Exception as e:
+            # Aquí caen errores técnicos (se cortó la conexión, error de código, etc.)
+            print(f"\n Ocurrió un error inesperado: {e}")
 
     def leerProcedimiento(self):
         print("\n     Lectura de Procedimiento")

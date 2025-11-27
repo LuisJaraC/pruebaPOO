@@ -1,3 +1,5 @@
+import mysql.connector
+
 class MascotaRepo:
     def __init__(self, mydb):
         self.mydb = mydb
@@ -20,10 +22,23 @@ class MascotaRepo:
         )
         
         # realizamos accion en BD
-        cursor.execute(sql, val)
+        try:
+            # Intentamos ejecutar la inserción
+            cursor.execute(sql, val)
+            self.mydb.commit()
+            cursor.close()
+            return True # Retornamos True si todo salió bien
+            
+        except mysql.connector.Error as err:
+            # Capturamos si hay error
+            if err.errno == 1452: #error 1452 es un error de FK
+                print(f"\n[ERROR BD] El RUT de cuidador '{mascota.rut_cuidador}' no existe en la base de datos.")
+            else:
+                print(f"\n[ERROR BD] Ocurrió un error desconocido: {err}")
+            
+            cursor.close() # Cerrar cursor aunque falle
+            return False # Retornamos False si falló
 
-        self.mydb.commit()
-        cursor.close()
     
     def leerMascota(self):
         cursor = self.mydb.cursor()

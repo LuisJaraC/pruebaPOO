@@ -7,6 +7,7 @@ CREATE TABLE USUARIO(
     contrasena VARCHAR(50),
     rol VARCHAR(20)
 );
+
 CREATE TABLE cuidador(
     rut_cuidador VARCHAR (12) PRIMARY KEY,
     nombre VARCHAR(50),
@@ -53,32 +54,36 @@ CREATE TABLE procedimiento(
     FOREIGN KEY (rut_veterinario) REFERENCES veterinario (rut_veterinario)
 );
 
+-- 1. Insertar Usuarios
+INSERT INTO USUARIO (nombre_usuario, contrasena, rol) VALUES 
+('vet1', 'vet123', 'veterinario1');
 
--- 1. Insertar Cuidadores
+
+-- 2. Insertar Cuidadores
 INSERT INTO cuidador (rut_cuidador, nombre, direccion, telefono, email) VALUES 
 ('12.345.678-9', 'Juan Pérez', 'Av. Siempre Viva 742', '+56911111111', 'juan@email.com'),
 ('9.876.543-2', 'María González', 'Calle Falsa 123', '+56922222222', 'maria@email.com'),
 ('15.555.444-K', 'Carlos Ruiz', 'Pasaje Los Aromos 45', '+56933333333', 'carlos@email.com');
 
--- 2. Insertar Veterinarios
+-- 3. Insertar Veterinarios
 INSERT INTO veterinario (rut_veterinario, nombre, especialidad, anios_experiencia, contacto) VALUES 
 ('10.111.222-3', 'Dra. Ana Silva', 'Medicina General', 5, '+56944444444'),
 ('14.222.333-4', 'Dr. Pedro Soto', 'Cirugía', 12, '+56955555555'),
 ('18.999.888-7', 'Dra. Laura Díaz', 'Dermatología', 8, '+56966666666');
 
--- 3. Insertar Mascotas (Se asocian a los RUTs de los cuidadores de arriba)
+-- 4. Insertar Mascotas (Se asocian a los RUTs de los cuidadores de arriba)
 INSERT INTO mascota (nombre, especie, raza, edad, peso, sexo, rut_cuidador) VALUES 
 ('Bobby', 'Perro', 'Golden Retriever', 5, 30.5, 'M', '12.345.678-9'),
 ('Luna', 'Gato', 'Siamés', 3, 4.2, 'H', '9.876.543-2'),
 ('Rocky', 'Perro', 'Bulldog Francés', 2, 12.0, 'M', '15.555.444-K');
 
--- 4. Insertar Fichas Clínicas (Se asocian a los IDs de mascota 1, 2 y 3)
+-- 5. Insertar Fichas Clínicas (Se asocian a los IDs de mascota 1, 2 y 3)
 INSERT INTO ficha_clinica (id_mascota, diagnostico, Tratamientos, Restricciones_alertas) VALUES 
 (1, 'Otitis canina', 'Limpieza y gotas', 'Alergia a la penicilina'),
 (2, 'Control sano', 'Vacuna triple felina', 'Ninguna'),
 (3, 'Fractura leve pata', 'Vendaje y reposo', 'No correr por 2 semanas');
 
--- 5. Insertar Procedimientos (Se asocian a Fichas y Veterinarios)
+-- 6. Insertar Procedimientos (Se asocian a Fichas y Veterinarios)
 INSERT INTO procedimiento (id_ficha, rut_veterinario, tipo_procedimiento, indicaciones, costo) VALUES 
 (1, '10.111.222-3', 'Limpieza de oídos', 'Aplicar gotas cada 8 hrs', 25000),
 (2, '10.111.222-3', 'Vacunación', 'Reposo por 24 hrs', 15000),

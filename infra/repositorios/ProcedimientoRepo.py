@@ -1,3 +1,5 @@
+import mysql.connector
+
 class ProcedimientoRepo:
     def __init__(self, mydb):
         self.mydb = mydb
@@ -18,10 +20,20 @@ class ProcedimientoRepo:
         )
         
         # realizamos accion en BD
-        cursor.execute(sql, val)
-
-        self.mydb.commit()
-        cursor.close()
+        try:
+            cursor.execute(sql, val)
+            self.mydb.commit()
+            cursor.close()
+            return True
+            
+        except mysql.connector.Error as err:
+            cursor.close()
+            # Error 1452: Falla de Llave Foránea (No existe Ficha o No existe Veterinario)
+            if err.errno == 1452:
+                # Como no sabemos cuál de los dos falló solo con el código, damos un mensaje general útil
+                raise ValueError(f"Error de integridad: Verifique que la Ficha ID '{procedimiento.id_ficha}' y el Veterinario RUT '{procedimiento.rut_veterinario}' existan realmente.")
+            else:
+                raise err
 
     def leerProcedimiento(self):
         cursor = self.mydb.cursor()
