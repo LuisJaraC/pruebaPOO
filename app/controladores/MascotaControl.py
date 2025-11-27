@@ -44,8 +44,6 @@ class MascotaControl:
 
         self.conexionContexto.MascotaRepo.leerMascota()
     
-
-    # nombre, especie, raza, edad, peso, sexo, rut_cuidador
     def actualizarMascota(self):
         print("\n        Actualizacion Mascota")
         id_mascota = input("\nIngrese id de mascota: ")
